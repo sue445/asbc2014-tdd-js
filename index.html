@@ -1,19 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Doorkeeper search</title>
     <meta charset="UTF-8">
-    <title></title>
 </head>
 <body>
 
+<dl>
+    <dt>since</dt>
+    <dd><input type="text" id="since"/></dd>
+    <dt>until</dt>
+    <dd><input type="text" id="until"/></dd>
+</dl>
+
+<input type="button" value="検索" id="search">
+
+<table>
+    <thead>
+    <tr>
+        <th>title</th>
+        <th>starts_at</th>
+    </tr>
+    </thead>
+    <tbody id="event_area">
+    </tbody>
+</table>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-<script src="./src/Doorkeeper.js"></script>
+<script src="src/Doorkeeper.js"></script>
 <script>
     $(function(){
         var doorkeeper = new Doorkeeper();
         doorkeeper.search();
-        console.log("Hello ASBC!");
+
+        $("#search").click(function(){
+            doorkeeper.search({
+                since: $("#since").val(),
+                until: $("#until").val()
+            });
+        });
     });
 </script>
+
+
 </body>
 </html>
